@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Cdv.Functions": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7174",
+      "launchBrowser": false
+    }
+  }
+}
