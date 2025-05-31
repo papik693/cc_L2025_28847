@@ -105,9 +105,8 @@ resource "azurerm_linux_function_app" "func" {
     application_insights_connection_string = var.enable_application_insights ? azurerm_application_insights.appinsights[0].connection_string : null
     application_insights_key = var.enable_application_insights ? azurerm_application_insights.appinsights[0].instrumentation_key : null
 
-    always_on = true
-    use_32_bit_worker = false
-
+    # use_32_bit_worker = false
+    # always_on = true
     # Enable system packages for ODBC
     app_scale_limit = 1
     health_check_path = "/api/items"
@@ -121,6 +120,9 @@ resource "azurerm_linux_function_app" "func" {
     "WEBSITE_CONTENTSHARE"          = lower(var.codename)
     "APPLICATIONINSIGHTS_CONNECTION_STRING" = var.enable_application_insights ? azurerm_application_insights.appinsights[0].connection_string : ""
     
+    
+    # Enable startup script
+
     # Enable startup script
     "WEBSITE_RUN_FROM_PACKAGE"      = "1"
     "ENABLE_ORYX_BUILD"             = "true"
@@ -131,6 +133,8 @@ resource "azurerm_linux_function_app" "func" {
   lifecycle {
     ignore_changes = [
       app_settings["APPINSIGHTS_INSTRUMENTATIONKEY"],
+      # app_settings["APPLICATIONINSIGHTS_CONNECTION_STRING"],
+      # app_settings["AzureWebJobsStorage"],
       site_config[0].application_insights_key,
     ]
   }

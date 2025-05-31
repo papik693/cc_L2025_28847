@@ -20,6 +20,16 @@ module "app1" {
   enable_application_insights = true
 } 
 
+# module "app2" {
+#   source = "../modules/azure_function_app"
+
+#   codename                    = "app2"
+#   location                    = "North Europe"
+#   resource_group_name         = "cdv"
+#   enable_application_insights = true
+# } 
+
+
 output "app1" {
   value = module.app1
   sensitive = true
