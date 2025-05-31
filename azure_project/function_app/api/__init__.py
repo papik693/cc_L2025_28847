@@ -7,13 +7,11 @@ from azure.functions import HttpRequest, HttpResponse
 
 def get_db_connection():
     conn_str = os.environ['DATABASE_CONNECTION_STRING']
-    # Parse the existing connection string for server, database, user, and password
     server = conn_str.split('Server=')[1].split(';')[0]
     database = conn_str.split('Initial Catalog=')[1].split(';')[0]
     user = conn_str.split('User ID=')[1].split(';')[0]
     password = conn_str.split('Password=')[1].split(';')[0]
     
-    # Build a new connection string with explicit parameters
     new_conn_str = (
         f"DRIVER={{ODBC Driver 17 for SQL Server}};"
         f"Server={server};"
